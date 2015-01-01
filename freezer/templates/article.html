@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% import 'utils.html' as utils %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+{% if article.published|d %}
+  <article>
+    <header>
+      <h1>{{ article.title }}</h1>
+      <p>On {{ utils.html5_date(article.published) }}
+        {% for tag in article.tags|d([]) -%}
+          {% if loop.first %}in {% else %}, {% endif -%}
+          <a href="{{ url_for('tag', name=tag) }}">{{ tag }}</a>
+        {%- endfor %}
+      </p>
+    </header>
+    {{ article.html|safe }}
+  </article>
+{% else %}
+  <header>
+    <h1>{{ article.title }}</h1>
+  </header>
+  {% if article.html %}
+  <section>
+    {{ article.html|safe }}
+  </section>
+  {% endif %}
+{% endif %}
+{% endblock %}

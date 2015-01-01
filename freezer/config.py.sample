@@ -1,0 +1,7 @@
+# -*- coding: utf-8 -*-
+DEBUG = False
+SITE_URL = u"http://yoursite.org"
+SITE_TITLE = u"yoursite.org"
+SITE_AUTHOR = u"John Smith"
+FREEZER_DESTINATION = '../build'
+RSYNC_DESTINATION = 'user@example:/blog/dir'

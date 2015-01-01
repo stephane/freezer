@@ -1,0 +1,19 @@
+{% macro html5_date(date, format='%B %d, %Y', pubdate=True) -%}
+    <time datetime="{{ date.isoformat() }}" {{ 'pubdate' if pubdate }}>
+        {{- date.strftime(format) }}</time>
+{%- endmacro %}
+
+{% macro article_list(articles) %}
+{% if articles %}
+  <section class="article_list">
+  {% for article in articles %}
+    <article>
+      <h3><a href="{{ article.url() }}">{{ article.title }}</a></h3>
+      <p>{{ html5_date(article.published) }}</p>
+      {{ article.summary|default|markdown|safe }}
+      <p><a href="{{ article.url() }}">Read more…</a></p>
+    </article>
+  {% endfor %}
+  </section>
+{% endif %}
+{% endmacro %}
